@@ -49,7 +49,7 @@ const Header = () => {
               alt="Três Marias Solar" 
               className="h-12 w-auto object-contain"
             />
-            <div>
+            <div className="md:hidden xl:block">
               <h1 className="text-xl font-bold text-gray-800 leading-tight">
                 Três Marias Solar
               </h1>
