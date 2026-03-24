@@ -4,15 +4,18 @@ export const companyInfo = {
   name: "Três Marias Solar",
   tagline: "Expertise em Energia Solar",
   description: "Três Marias Solar significa expertise em energia solar. Com mais de 3 megawatts instalados, oferecemos soluções viáveis e sob medida e um serviço pós-venda rápido e eficaz, garantindo sua satisfação e o retorno do seu investimento.",
+  cnpj: "24.899.169/0001-93",
   stats: {
     installed: "3+ MW",
     clients: "200+",
     experience: "5+ Anos"
   },
   contact: {
-    phone: "(31) 99999-9999",
-    email: "contato@tresmariassolar.com.br",
-    address: "Belo Horizonte, MG"
+    phone: "38 99752-3325",
+    phoneUrl: "https://wa.me/5538997523325",
+    email: "arthur@3msolar.com.br",
+    address: "Rua Barão do rio Branco, 64 Patos de Minas, MG, 38700-170",
+    mapsUrl: "https://maps.app.goo.gl/YgwxceX57JZyGWMy7"
   },
   social: {
     facebook: "#",
@@ -150,7 +153,6 @@ export const projects = [
     title: "Residência Familiar - Belo Horizonte",
     category: "Residencial",
     power: "8 kWp",
-    savings: "92%",
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276",
     description: "Sistema completo para residência de 250m², reduzindo drasticamente os custos com energia."
   },
@@ -159,7 +161,6 @@ export const projects = [
     title: "Indústria Metalúrgica - Contagem",
     category: "Industrial",
     power: "150 kWp",
-    savings: "85%",
     image: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d",
     description: "Grande instalação industrial com retorno de investimento em apenas 3 anos."
   },
@@ -168,7 +169,6 @@ export const projects = [
     title: "Supermercado Regional",
     category: "Comercial",
     power: "45 kWp",
-    savings: "88%",
     image: "https://images.pexels.com/photos/6158914/pexels-photo-6158914.jpeg",
     description: "Solução comercial que reduziu significativamente os custos operacionais."
   },
@@ -177,7 +177,6 @@ export const projects = [
     title: "Condomínio Residencial",
     category: "Residencial",
     power: "120 kWp",
-    savings: "90%",
     image: "https://images.pexels.com/photos/4254164/pexels-photo-4254164.jpeg",
     description: "Sistema compartilhado beneficiando 40 famílias com economia na conta de luz."
   },
@@ -186,7 +185,6 @@ export const projects = [
     title: "Fazenda Agropecuária",
     category: "Rural",
     power: "200 kWp",
-    savings: "95%",
     image: "https://images.unsplash.com/photo-1635424709961-f3a150459ad4",
     description: "Maior projeto rural da região, garantindo sustentabilidade e economia."
   },
@@ -195,7 +193,6 @@ export const projects = [
     title: "Escritório Corporativo",
     category: "Comercial",
     power: "25 kWp",
-    savings: "87%",
     image: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d",
     description: "Empresa reduz custos e melhora sua imagem sustentável no mercado."
   }

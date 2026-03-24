@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Sun, Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { companyInfo } from '../data/mock';
 
 const Footer = () => {
@@ -63,6 +63,7 @@ const Footer = () => {
                 { label: 'Início', id: 'hero' },
                 { label: 'Benefícios', id: 'benefits' },
                 { label: 'Como Funciona', id: 'how-it-works' },
+                { label: 'Portfólio', id: 'portfolio' },
                 { label: 'Depoimentos', id: 'testimonials' },
                 { label: 'FAQ', id: 'faq' },
                 { label: 'Contato', id: 'contact' }
@@ -109,10 +110,15 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-6">Contato</h4>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <Phone className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" />
+                <MessageCircle className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-sm text-gray-500 mb-1">Telefone</p>
-                  <a href={`tel:${companyInfo.contact.phone}`} className="text-gray-300 hover:text-orange-500 transition-colors">
+                  <p className="text-sm text-gray-500 mb-1">WhatsApp</p>
+                  <a 
+                    href={companyInfo.contact.phoneUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-orange-500 transition-colors"
+                  >
                     {companyInfo.contact.phone}
                   </a>
                 </div>
@@ -121,7 +127,10 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-gray-500 mb-1">E-mail</p>
-                  <a href={`mailto:${companyInfo.contact.email}`} className="text-gray-300 hover:text-orange-500 transition-colors break-all">
+                  <a 
+                    href={`mailto:${companyInfo.contact.email}`}
+                    className="text-gray-300 hover:text-orange-500 transition-colors break-all"
+                  >
                     {companyInfo.contact.email}
                   </a>
                 </div>
@@ -130,7 +139,14 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Localização</p>
-                  <p className="text-gray-300">{companyInfo.contact.address}</p>
+                  <a
+                    href={companyInfo.contact.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-orange-500 transition-colors"
+                  >
+                    {companyInfo.contact.address}
+                  </a>
                 </div>
               </li>
             </ul>
@@ -142,9 +158,14 @@ const Footer = () => {
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} {companyInfo.name}. Todos os direitos reservados.
-          </p>
+          <div className="text-center md:text-left">
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} {companyInfo.name}. Todos os direitos reservados.
+            </p>
+            <p className="text-gray-500 text-xs mt-1">
+              CNPJ: {companyInfo.cnpj}
+            </p>
+          </div>
           <div className="flex space-x-6 text-sm">
             <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
               Política de Privacidade

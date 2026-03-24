@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { Zap, Building2, Home, Sprout, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Zap, Building2, Home, Sprout } from 'lucide-react';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
-import { projects } from '../data/mock';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const categoryIcons = {
   Residencial: Home,
@@ -13,12 +16,40 @@ const categoryIcons = {
 
 const Portfolio = () => {
   const [filter, setFilter] = useState('Todos');
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   
   const categories = ['Todos', 'Residencial', 'Comercial', 'Industrial', 'Rural'];
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${API}/projects`);
+      setProjects(response.data);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   
   const filteredProjects = filter === 'Todos' 
     ? projects 
     : projects.filter(project => project.category === filter);
+
+  if (isLoading) {
+    return (
+      <section id="portfolio" className="py-24 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-4 text-gray-600">Carregando projetos...</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="portfolio" className="py-24 bg-white relative overflow-hidden">
@@ -58,65 +89,60 @@ const Portfolio = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {filteredProjects.map((project, index) => {
-            const CategoryIcon = categoryIcons[project.category] || Building2;
-            return (
-              <Card
-                key={project.id}
-                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-orange-500 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Project Image */}
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent"></div>
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 flex items-center space-x-2 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg">
-                    <CategoryIcon className="w-4 h-4 text-orange-600" />
-                    <span className="text-sm font-semibold text-gray-900">
-                      {project.category}
-                    </span>
+        {filteredProjects.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">Nenhum projeto encontrado nesta categoria.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {filteredProjects.map((project, index) => {
+              const CategoryIcon = categoryIcons[project.category] || Building2;
+              return (
+                <Card
+                  key={project.id}
+                  className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-orange-500 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Project Image */}
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent"></div>
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 flex items-center space-x-2 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg">
+                      <CategoryIcon className="w-4 h-4 text-orange-600" />
+                      <span className="text-sm font-semibold text-gray-900">
+                        {project.category}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Savings Badge */}
-                  <div className="absolute top-4 right-4 bg-orange-600 text-white px-3 py-2 rounded-lg font-bold">
-                    {project.savings} economia
-                  </div>
-                </div>
+                  {/* Project Info */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      {project.description}
+                    </p>
 
-                {/* Project Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Power Info */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center space-x-2">
+                    {/* Power Info */}
+                    <div className="flex items-center space-x-2 pt-4 border-t border-gray-100">
                       <Zap className="w-5 h-5 text-orange-600" />
                       <span className="text-lg font-bold text-gray-900">
                         {project.power}
                       </span>
                     </div>
-                    <button className="text-orange-600 hover:text-orange-700 font-medium flex items-center space-x-1 group">
-                      <span>Ver detalhes</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
                   </div>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
+                </Card>
+              );
+            })}
+          </div>
+        )}
 
         {/* CTA Section */}
         <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl p-12 text-center shadow-2xl">
@@ -131,7 +157,6 @@ const Portfolio = () => {
             className="bg-white text-orange-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             Solicitar Orçamento Gratuito
-            <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </div>

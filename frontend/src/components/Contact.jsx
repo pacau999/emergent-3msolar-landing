@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, MessageCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
-import { companyInfo, mockFormSubmit } from '../data/mock';
+import { companyInfo } from '../data/mock';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,10 +31,11 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await mockFormSubmit(formData);
+      const response = await axios.post(`${API}/contact`, formData);
       toast.success('Mensagem enviada com sucesso! Entraremos em contato em breve.');
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
+      console.error('Error submitting form:', error);
       toast.error('Erro ao enviar mensagem. Tente novamente.');
     } finally {
       setIsSubmitting(false);
@@ -108,7 +113,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300"
-                  placeholder="(31) 99999-9999"
+                  placeholder="(38) 99999-9999"
                 />
               </div>
 
@@ -141,44 +146,57 @@ const Contact = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            {/* Info Cards */}
-            <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl p-8 text-white shadow-2xl">
+            {/* Info Card - DARK BLUE */}
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 text-white shadow-2xl">
               <h3 className="text-2xl font-bold mb-6">Informações de Contato</h3>
               
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
+                <a
+                  href={companyInfo.contact.phoneUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start space-x-4 hover:opacity-80 transition-opacity group"
+                >
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-orange-600 transition-colors">
+                    <MessageCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">Telefone</p>
-                    <a href={`tel:${companyInfo.contact.phone}`} className="text-orange-100 hover:text-white transition-colors">
+                    <p className="font-semibold mb-1">WhatsApp</p>
+                    <span className="text-gray-300">
                       {companyInfo.contact.phone}
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
+                <a
+                  href={`mailto:${companyInfo.contact.email}`}
+                  className="flex items-start space-x-4 hover:opacity-80 transition-opacity group"
+                >
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-orange-600 transition-colors">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <p className="font-semibold mb-1">E-mail</p>
-                    <a href={`mailto:${companyInfo.contact.email}`} className="text-orange-100 hover:text-white transition-colors break-all">
+                    <span className="text-gray-300 break-all">
                       {companyInfo.contact.email}
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
+                <a
+                  href={companyInfo.contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start space-x-4 hover:opacity-80 transition-opacity group"
+                >
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-orange-600 transition-colors">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <p className="font-semibold mb-1">Localização</p>
-                    <p className="text-orange-100">{companyInfo.contact.address}</p>
+                    <span className="text-gray-300">{companyInfo.contact.address}</span>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 
@@ -198,18 +216,6 @@ const Contact = () => {
                   <span>Domingo</span>
                   <span className="font-semibold text-gray-900">Fechado</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Emergency Contact */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 text-white shadow-2xl">
-              <h3 className="text-xl font-bold mb-2">Atendimento Pós-Venda</h3>
-              <p className="text-gray-300 mb-4">
-                Suporte técnico rápido e eficaz para nossos clientes
-              </p>
-              <div className="inline-flex items-center space-x-2 bg-orange-600 px-4 py-2 rounded-full">
-                <Phone className="w-4 h-4" />
-                <span className="font-semibold">24/7 Disponível</span>
               </div>
             </div>
           </div>
