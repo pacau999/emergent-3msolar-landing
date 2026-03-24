@@ -26,6 +26,7 @@ const Header = () => {
     { label: 'Início', id: 'hero' },
     { label: 'Benefícios', id: 'benefits' },
     { label: 'Como Funciona', id: 'how-it-works' },
+    { label: 'Portfólio', id: 'portfolio' },
     { label: 'Depoimentos', id: 'testimonials' },
     { label: 'FAQ', id: 'faq' },
     { label: 'Contato', id: 'contact' }
@@ -42,16 +43,12 @@ const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-lg">
-              <Sun className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800 leading-tight">
-                Três Marias Solar
-              </h1>
-              <p className="text-xs text-gray-600">Energia Solar</p>
-            </div>
+          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_solar-marketplace-11/artifacts/7edfjfri_Logo3MSolar.png" 
+              alt="Três Marias Solar" 
+              className="h-12 w-auto object-contain"
+            />
           </div>
 
           {/* Desktop Navigation */}

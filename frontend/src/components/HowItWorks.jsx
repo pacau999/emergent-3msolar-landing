@@ -32,15 +32,10 @@ const HowItWorks = () => {
             >
               {/* Step Number */}
               <div className="flex-shrink-0">
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
-                    <span className="text-3xl font-bold text-white">
-                      {step.step}
-                    </span>
-                  </div>
-                  {index < howItWorks.length - 1 && (
-                    <div className="hidden lg:block absolute top-24 left-1/2 transform -translate-x-1/2 w-0.5 h-32 bg-gradient-to-b from-orange-300 to-transparent"></div>
-                  )}
+                <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300">
+                  <span className="text-3xl font-bold text-white">
+                    {step.step}
+                  </span>
                 </div>
               </div>
 

@@ -144,6 +144,63 @@ export const faqData = [
   }
 ];
 
+export const projects = [
+  {
+    id: 1,
+    title: "Residência Familiar - Belo Horizonte",
+    category: "Residencial",
+    power: "8 kWp",
+    savings: "92%",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+    description: "Sistema completo para residência de 250m², reduzindo drasticamente os custos com energia."
+  },
+  {
+    id: 2,
+    title: "Indústria Metalúrgica - Contagem",
+    category: "Industrial",
+    power: "150 kWp",
+    savings: "85%",
+    image: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d",
+    description: "Grande instalação industrial com retorno de investimento em apenas 3 anos."
+  },
+  {
+    id: 3,
+    title: "Supermercado Regional",
+    category: "Comercial",
+    power: "45 kWp",
+    savings: "88%",
+    image: "https://images.pexels.com/photos/6158914/pexels-photo-6158914.jpeg",
+    description: "Solução comercial que reduziu significativamente os custos operacionais."
+  },
+  {
+    id: 4,
+    title: "Condomínio Residencial",
+    category: "Residencial",
+    power: "120 kWp",
+    savings: "90%",
+    image: "https://images.pexels.com/photos/4254164/pexels-photo-4254164.jpeg",
+    description: "Sistema compartilhado beneficiando 40 famílias com economia na conta de luz."
+  },
+  {
+    id: 5,
+    title: "Fazenda Agropecuária",
+    category: "Rural",
+    power: "200 kWp",
+    savings: "95%",
+    image: "https://images.unsplash.com/photo-1635424709961-f3a150459ad4",
+    description: "Maior projeto rural da região, garantindo sustentabilidade e economia."
+  },
+  {
+    id: 6,
+    title: "Escritório Corporativo",
+    category: "Comercial",
+    power: "25 kWp",
+    savings: "87%",
+    image: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d",
+    description: "Empresa reduz custos e melhora sua imagem sustentável no mercado."
+  }
+];
+
 export const mockFormSubmit = (formData) => {
   return new Promise((resolve) => {
     setTimeout(() => {

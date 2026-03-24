@@ -49,8 +49,8 @@ Criar uma landing page profissional e conversiva para a Três Marias Solar, empr
 ### ✅ Seções Implementadas (Fase 1 - Concluída em Dez 2025)
 
 1. **Header/Navbar**
-   - Logo Três Marias Solar
-   - Menu de navegação (sticky)
+   - Logo oficial 3M Solar (imagem enviada pelo cliente)
+   - Menu de navegação (sticky) com 7 itens
    - CTA "Solicitar Orçamento"
    - Menu mobile responsivo
 
@@ -72,29 +72,41 @@ Criar uma landing page profissional e conversiva para a Três Marias Solar, empr
    - Imagem ilustrativa ao final
 
 4. **How It Works Section**
-   - 4 passos do processo:
+   - 4 passos do processo (grid 2x2 limpo, sem conectores):
      1. Consulta Gratuita
      2. Projeto Personalizado
      3. Instalação Profissional
      4. Economia Imediata
    - Imagem split com conteúdo sobre equipe técnica
 
-5. **Testimonials Section**
+5. **Portfolio Section** ⭐ NOVA
+   - 6 projetos de instalações solares
+   - Filtros interativos (Todos, Residencial, Comercial, Industrial, Rural)
+   - Cards com:
+     - Imagem do projeto
+     - Categoria com ícone
+     - Potência instalada (kWp)
+     - Percentual de economia
+     - Descrição
+     - Link "Ver detalhes"
+   - CTA "Seu projeto pode ser o próximo!"
+
+6. **Testimonials Section**
    - 3 depoimentos de clientes reais (mockados)
    - Rating 5 estrelas
    - Trust badges com estatísticas
 
-6. **FAQ Section**
+7. **FAQ Section**
    - Accordion com 6 perguntas frequentes
    - CTA "Fale Conosco" ao final
 
-7. **Contact Section**
+8. **Contact Section**
    - Formulário de contato (mock - frontend only)
    - Informações de contato (telefone, email, localização)
    - Horário de atendimento
    - Card de pós-venda 24/7
 
-8. **Footer**
+9. **Footer**
    - Informações da empresa
    - Links rápidos
    - Serviços oferecidos
@@ -125,6 +137,7 @@ Criar uma landing page profissional e conversiva para a Três Marias Solar, empr
 - `howItWorks` (4 steps)
 - `testimonials` (3 clientes)
 - `faqData` (6 perguntas)
+- `projects` (6 projetos - Residencial, Comercial, Industrial, Rural)
 - `mockFormSubmit()` - função de simulação de envio de formulário
 
 ---
@@ -202,10 +215,12 @@ Criar uma landing page profissional e conversiva para a Três Marias Solar, empr
 
 ### Fase 1 - Frontend com Mock ✅ (CONCLUÍDA)
 - [x] Estrutura de pastas
-- [x] Header com navegação
+- [x] Header com logo oficial do cliente
 - [x] Hero section com CTAs
 - [x] Benefits section (6 cards)
-- [x] How It Works (4 steps)
+- [x] How It Works (4 steps - sem linhas conectoras)
+- [x] Portfolio section com 6 projetos
+- [x] Filtros interativos no portfólio
 - [x] Testimonials (3 clientes)
 - [x] FAQ com accordion
 - [x] Contact form (mock)
