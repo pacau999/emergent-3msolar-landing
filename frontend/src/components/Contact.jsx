@@ -5,10 +5,6 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
 import { companyInfo } from '../data/mock';
-import axios from 'axios';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +13,6 @@ const Contact = () => {
     phone: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,18 +23,31 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    try {
-      const response = await axios.post(`${API}/contact`, formData);
-      toast.success('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('Erro ao enviar mensagem. Tente novamente.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Format WhatsApp message
+    const message = `Olá! Vim do site da Três Marias Solar.
+
+*Nome:* ${formData.name}
+*Email:* ${formData.email}
+*Telefone:* ${formData.phone}
+
+*Mensagem:*
+${formData.message}`;
+
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Open WhatsApp with pre-filled message
+    const whatsappUrl = `${companyInfo.contact.phoneUrl}?text=${encodedMessage}`;
+    
+    // Open in new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Show success toast
+    toast.success('Abrindo WhatsApp...');
+    
+    // Clear form
+    setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
   return (
@@ -55,10 +63,10 @@ const Contact = () => {
             Contato
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Solicite seu Orçamento
+            Fale Conosco via WhatsApp
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Preencha o formulário e receba uma proposta personalizada em até 24 horas
+            Preencha o formulário e envie sua mensagem direto para nosso WhatsApp
           </p>
         </div>
 
@@ -135,11 +143,10 @@ const Contact = () => {
 
               <Button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
-                <Send className="ml-2 w-5 h-5" />
+                Enviar via WhatsApp
+                <MessageCircle className="ml-2 w-5 h-5" />
               </Button>
             </form>
           </div>
