@@ -35,7 +35,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-white/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
@@ -43,12 +43,18 @@ const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection('hero')}>
             <img 
               src="https://customer-assets.emergentagent.com/job_solar-marketplace-11/artifacts/7edfjfri_Logo3MSolar.png" 
               alt="Três Marias Solar" 
               className="h-12 w-auto object-contain"
             />
+            <div>
+              <h1 className="text-xl font-bold text-gray-800 leading-tight">
+                Três Marias Solar
+              </h1>
+              <p className="text-xs text-gray-600">Energia Solar</p>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
