@@ -286,21 +286,20 @@ docker build -t tres-marias-backend .
 docker run -p 8001:8001 --env-file .env tres-marias-backend
 ```
 
-### Deploy do Frontend
+### Deploy (Monorepo Vercel)
 
-#### Opção 1: Vercel (Recomendado)
+Esta aplicação foi reestruturada para suportar deploy zero-config no Vercel como um monorepo (React + FastAPI).
 
-```bash
-# 1. Instale Vercel CLI
-npm install -g vercel
+#### Passos para Vercel:
 
-# 2. Na pasta frontend
-cd frontend
-vercel
-
-# 3. Siga as instruções
-# Configure REACT_APP_BACKEND_URL nas variáveis de ambiente do Vercel
-```
+1. Suba o repositório para o GitHub.
+2. Importe o projeto no Vercel.
+3. O Vercel detectará automaticamente o Frontend React e as Serverless Functions Python na pasta `/api`.
+4. Configure as Variáveis de Ambiente no painel do Vercel:
+   - `MONGO_URL`
+   - `DB_NAME`
+   - `SECRET_KEY`
+5. Clique em Deploy.
 
 #### Opção 2: Build Estático + Nginx
 
@@ -557,40 +556,38 @@ Authorization: Bearer <token>
 
 ```
 tres-marias-solar/
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ui/              # Componentes Shadcn UI
-│   │   │   ├── Header.jsx
-│   │   │   ├── Hero.jsx
-│   │   │   ├── Benefits.jsx
-│   │   │   ├── HowItWorks.jsx
-│   │   │   ├── Portfolio.jsx
-│   │   │   ├── Testimonials.jsx
-│   │   │   ├── FAQ.jsx
-│   │   │   ├── Contact.jsx
-│   │   │   └── Footer.jsx
-│   │   ├── pages/
-│   │   │   ├── Home.jsx
-│   │   │   ├── AdminLogin.jsx
-│   │   │   └── AdminDashboard.jsx
-│   │   ├── data/
-│   │   │   └── mock.js          # Dados da empresa
-│   │   ├── App.js
-│   │   ├── App.css
-│   │   └── index.css
-│   ├── .env
-│   ├── package.json
-│   └── tailwind.config.js
-│
-├── backend/
-│   ├── server.py                # Servidor FastAPI
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── ui/              # Componentes Shadcn UI
+│   │   ├── Header.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Benefits.jsx
+│   │   ├── HowItWorks.jsx
+│   │   ├── Portfolio.jsx
+│   │   ├── Testimonials.jsx
+│   │   ├── FAQ.jsx
+│   │   ├── Contact.jsx
+│   │   └── Footer.jsx
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── AdminLogin.jsx
+│   │   └── AdminDashboard.jsx
+│   ├── data/
+│   │   └── mock.js          # Dados da empresa
+│   ├── App.js
+│   ├── App.css
+│   └── index.css
+├── api/
+│   ├── index.py                 # (Antigo server.py) Entrypoint Vercel
 │   ├── models.py                # Modelos Pydantic
 │   ├── auth.py                  # Autenticação JWT
-│   ├── .env
-│   └── requirements.txt
-│
+│   └── .env                     # Variáveis backend
+├── .env                         # Variáveis frontend
+├── package.json
+├── requirements.txt             # Dependências Python
+├── vercel.json                  # Configurações de rotas do Vercel
+├── tailwind.config.js
 └── README.md
 ```
 
